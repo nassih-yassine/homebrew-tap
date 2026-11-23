@@ -1,0 +1,31 @@
+name: Update formula
+
+on:
+  schedule:
+    - cron: "17 5 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - name: Rewrite the formula from the latest release
+        run: python3 scripts/update_formula.py
+      - name: Validate the formula
+        run: ruby -c Formula/dep-vet.rb
+      - name: Commit when the version moved
+        run: |
+          if git diff --quiet; then
+            echo "formula already current"
+            exit 0
+          fi
+          version=$(sed -n 's/^  version "\(.*\)"$/\1/p' Formula/dep-vet.rb)
+          git config user.name "dep-vet bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add Formula/dep-vet.rb
+          git commit -m "dep-vet ${version}"
+          git push
