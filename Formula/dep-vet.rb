@@ -24,8 +24,13 @@ class DepVet < Formula
     end
   end
 
+  livecheck do
+    url :stable
+    strategy :github_latest
+  end
+
   def install
-    bin.install Dir["dep-vet-*/dep-vet"].first || "dep-vet"
+    bin.install "dep-vet"
   end
 
   test do
