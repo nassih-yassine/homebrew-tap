@@ -7,6 +7,7 @@ the same release changes nothing.
 """
 
 import json
+import os
 import pathlib
 import sys
 import urllib.request
@@ -64,14 +65,22 @@ end
 '''
 
 
+def token() -> str | None:
+    for name in ("GH_TOKEN", "GITHUB_TOKEN"):
+        value = os.environ.get(name)
+        if value:
+            return value
+    return None
+
+
 def fetch(url: str) -> bytes:
-    request = urllib.request.Request(
-        url,
-        headers={
-            "Accept": "application/vnd.github+json",
-            "User-Agent": "dep-vet-homebrew-tap",
-        },
-    )
+    headers = {
+        "Accept": "application/vnd.github+json",
+        "User-Agent": "dep-vet-homebrew-tap",
+    }
+    if (value := token()) is not None:
+        headers["Authorization"] = f"Bearer {value}"
+    request = urllib.request.Request(url, headers=headers)
     with urllib.request.urlopen(request, timeout=30) as response:
         return response.read()
 
