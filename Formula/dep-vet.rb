@@ -1,26 +1,26 @@
 class DepVet < Formula
   desc "Check a dependency's risk before it enters your lockfile"
   homepage "https://github.com/nassih-yassine/Dep-Vet"
-  version "0.13.4"
+  version "0.13.5"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.arm?
-      url "https://github.com/nassih-yassine/Dep-Vet/releases/download/v0.13.4/dep-vet-aarch64-apple-darwin.tar.xz"
-      sha256 "0e9167f247cc7a66c1a65a040b62e3e91f0d836c2cec230fce84c3e3e6149f19"
+      url "https://github.com/nassih-yassine/Dep-Vet/releases/download/v0.13.5/dep-vet-aarch64-apple-darwin.tar.xz"
+      sha256 "5973c103bca3b83355a7ece6e09fee9a80a9330eb032cde4ff7ae08e177be18d"
     else
-      url "https://github.com/nassih-yassine/Dep-Vet/releases/download/v0.13.4/dep-vet-x86_64-apple-darwin.tar.xz"
-      sha256 "05011c10b2ab31e64cec949206b7d55ea5c47244980ff5a5069d3afb87c57bec"
+      url "https://github.com/nassih-yassine/Dep-Vet/releases/download/v0.13.5/dep-vet-x86_64-apple-darwin.tar.xz"
+      sha256 "30cdf2ca07af87b1ee854d75fc659e2c4f5311758934ed0cafe5e84ccb63a952"
     end
   end
 
   on_linux do
     if Hardware::CPU.arm?
-      url "https://github.com/nassih-yassine/Dep-Vet/releases/download/v0.13.4/dep-vet-aarch64-unknown-linux-musl.tar.xz"
-      sha256 "8dd4936fdfdd18478cb28364a82770e2106031baa0c6f030a32c4c303938a3f6"
+      url "https://github.com/nassih-yassine/Dep-Vet/releases/download/v0.13.5/dep-vet-aarch64-unknown-linux-musl.tar.xz"
+      sha256 "ef78d84a98c888e6179b8116cc8a793653976feb421c1c99c39082669d2b0b23"
     else
-      url "https://github.com/nassih-yassine/Dep-Vet/releases/download/v0.13.4/dep-vet-x86_64-unknown-linux-musl.tar.xz"
-      sha256 "1364dff0ecc6d282658722327fd05201229e147b30a5293c2007aa84857cf160"
+      url "https://github.com/nassih-yassine/Dep-Vet/releases/download/v0.13.5/dep-vet-x86_64-unknown-linux-musl.tar.xz"
+      sha256 "48d8fc02d1bb71bdde531dc5b0a1a40a5012ef965bae50e9609fbbefacb32904"
     end
   end
 
@@ -34,6 +34,6 @@ class DepVet < Formula
   end
 
   test do
-    assert_match "dep-vet 0.13.4", shell_output("#{bin}/dep-vet --version")
+    assert_match "dep-vet 0.13.5", shell_output("#{bin}/dep-vet --version")
   end
 end
